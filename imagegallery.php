@@ -9,6 +9,8 @@
     <!-- CSS -->
     <style>
 
+    @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative:700&display=swap');
+
     img {
         margin-bottom: -5px;
     }
@@ -17,6 +19,9 @@
         text-align: center;
         padding: 15px 0 15px 0;
         font-size: 3em;
+        font-family: 'Cinzel Decorative', cursive;
+        border-top: 10px solid #eaebff;
+        border-bottom: 10px solid #eaebff;
     }
 
     footer {
@@ -177,12 +182,12 @@
         // for uploading images
         $upload_dir = 'images';
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $tmp_file = $_FILES['file_upload']['tmp_name'];
             $target_file = $_FILES['file_upload']['name'];
             // $upload_dir = 'images';
             
-            if(move_uploaded_file($tmp_file, $upload_dir . "/" . $target_file)){
+            if (move_uploaded_file($tmp_file, $upload_dir . "/" . $target_file)) {
                 $message = "<div class='success'>File uploaded successfully</div>";
             } else {
                 $error = $_FILES['file_upload']['error'];
@@ -191,8 +196,8 @@
         } // end if for POST
 
         // LOGIC FOR DELETING FILES
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
-            if(isset($_GET['del'])){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (isset($_GET['del'])) {
                 $image_file = $_GET['del'];
                 unlink("images/$image_file");
                 $message = "<div class='deleted'>File deleted successfully</div>";
@@ -220,7 +225,9 @@
         <!-- END UPLOAD FORM -->
 
         <!-- Message display to give user feedback that upload worked or not-->
-        <?php if(!empty($message)) {echo "<p>{$message}</p>";} ?>
+        <?php if (!empty($message)) {
+        echo "<p>{$message}</p>";
+    } ?>
 
         <!-- BEGIN DISPLAY OF IMAGES -->
         <section class="galleryDisplay">
@@ -229,8 +236,8 @@
 
                     if (is_dir($upload_dir)) {
                         $dir_array = scandir($upload_dir);
-                        foreach ($dir_array as $image_file){
-                            if(strpos($image_file,'.') > 0){
+                        foreach ($dir_array as $image_file) {
+                            if (strpos($image_file, '.') > 0) {
                                 echo "<div class='imageDisplay'>";
                                 echo "<div class='imageFileWrapper'>";
                                 echo "<div class='filenameDisplay'><b>Filename:</b><br> {$image_file}<br/></div>";
